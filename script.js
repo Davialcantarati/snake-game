@@ -39,7 +39,6 @@ function update (event){
     if(event.keyCode == 40 && direction != "up") direction = "down";
 }
 
-
 function startGame(){
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if(snake[0].x < 0 && direction == "left" )snake[0].x = 16 * box;
@@ -58,12 +57,19 @@ let snakeY = snake[0].y;
     if(direction == "up") snakeY -= box;
     if(direction == "down") snakeY += box;
 
-    snake.pop();
+    if(snakeX != food.x || snakeY != food.y){
+        snake.pop();
+    }
+    else{food.x = Math.floor(Math.random() * 15 + 1) * box,
+         food.y = Math.floor(Math.random() * 15 + 1) * box
+
+    };
+    
 
     let newHead = {
         x: snakeX,
         y: snakeY
-    }
+    };
     
     snake.unshift(newHead);
 
